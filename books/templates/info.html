@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block title %}도서 상세 정보{% endblock %}
+{% block body %}
+    <p>출간일: {{ info.publication_at }}</p>
+    <p>등록일: {{ info.registration_at }}</p>
+    <p>도서 소개글: {{ info.book_writing }}</p>
+    <p>저자 소개글: {{ info.author_writing }}</p>
+{% endblock %}

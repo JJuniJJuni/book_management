@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}도서 목록{% endblock %}
+{% block body %}
+    <table>
+        {% for book in books %}
+        <tr>
+            <td>이름: <a href="{% url 'info' book.id %}">{{ book.name }}</a></td>
+            <td>저자: {{ book.author }},</td>
+            <td>출판사: {{ book.publisher }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% if messages %}
+        <ul class="messages">
+    {% for message in messages %}
+        <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+    {% endfor %}
+        </ul>
+    {% endif %}
+    <div class="paginator">
+        <span class="step-links">
+        {% if books.has_previous %}
+            <a href="?page=1">&laquo; 처음</a>
+            <a href="?page={{ books.previous_page_number }}">이전</a>
+        {% endif %}
+        <span class="current">
+            쪽수 {{ books.number }} of {{ books.paginator.num_pages }}.
+        </span>
+        {% if books.has_next %}
+            <a href="?page={{ books.next_page_number }}">다음</a>
+            <a href="?page={{ books.paginator.num_pages }}">마지막 &raquo;</a>
+        {% endif %}
+        </span>
+    </div>
+{% endblock %}

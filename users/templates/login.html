@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}로그인{% endblock %}
+{% block body %}
+    {% if user.is_authenticated %}
+        <p><a href="{% url 'home_page' %}"/>Go Home</p>
+        <p><a href="{% url 'logout' %}">Logout with Google</a></p>
+        {% if messages %}
+        <p class="messages">
+            {% for message in messages %}
+            <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+            {% endfor %}
+        </p>
+        {% endif %}
+    {% else %}
+        <p><a href="{% url 'social:begin' 'google-oauth2' %}">Login with Google</a></p>
+    {% endif %}
+{% endblock %}
